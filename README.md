@@ -20,3 +20,6 @@ Projeto desenvolvido em **JavaScript e React** para calcular o troco de uma comp
 
 Projeto desenvolvido como atividade acadêmica para colocar em prática conceitos de **componentes, props, useState e eventos**.
 
+## Dsenvolvido por
+* Helloísa Leite
+* Katielly Fontes
