@@ -12,4 +12,25 @@
   border-radius: 10px;
 }
 
+.botao {
+  display: flex;
+  justify-content: center;
+}
+
+.botao-calcular {
+  background-color: var(--button-color);
+  color: var(--text-color);
+  font-family: var(--text-font-family);
+  font-size: 18px;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 30px;
+}
+
+.botao-calcular:hover {
+  background-color: var(--button-hover-color);
+  cursor: pointer;
+}
+
 
