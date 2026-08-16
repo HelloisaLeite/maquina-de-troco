@@ -6,8 +6,9 @@
 
 .container {
   background-color: var(--box-color);
-  width: 880px;
-  height: 640px;
+  width: 100%;
+  max-width: 880px;
+  min-height: 90vh;
   margin: 40px;
   border-radius: 10px;
 }
