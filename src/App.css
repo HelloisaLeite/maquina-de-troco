@@ -7,8 +7,8 @@
 .container {
   background-color: var(--box-color);
   width: 880px;
-  height: 620px;
-  margin-top: 50px;
+  height: 640px;
+  margin: 40px;
   border-radius: 10px;
 }
 
