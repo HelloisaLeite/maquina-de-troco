@@ -34,4 +34,21 @@
   cursor: pointer;
 }
 
+.resultado-calculo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5px;
+  font-family: var(--text-font-family);
+}
 
+.colunas {
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+}
+
+.coluna {
+  text-align: left;
+}

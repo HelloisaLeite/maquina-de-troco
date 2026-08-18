@@ -36,10 +36,11 @@ h1 {
   font-weight: 500;
 }
 
+
 p {
   font-family: var(--text-font-family);
   color: var(--text-primary-color);
   text-align: center;
-  font-size: 20px;
+  font-size: 14pxpx;
 }
 
