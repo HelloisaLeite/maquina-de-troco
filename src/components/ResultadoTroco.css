@@ -1,0 +1,22 @@
+.resultado {
+  width: 100%;
+  margin-top: 28px;
+  font-size: 16px;
+}
+
+.valor-resultado {
+  margin: 0 0 30px 0;
+  font-size: 16px;
+}
+
+.devolver {
+  margin-top: 0;
+}
+
+.devolver > p:first-child {
+  margin-bottom: 12px;
+}
+
+.devolver p {
+  margin: 7px 0;
+}

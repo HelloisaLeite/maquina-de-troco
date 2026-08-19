@@ -1,34 +1,79 @@
 import { useState } from 'react'
 import './App.css'
+
 import BotaoCalcular from './components/BotaoCalcular'
+import EntradaValores from './components/EntradaValores'
+import ResultadoTroco from './components/ResultadoTroco'
+import Mensagem from './components/Mensagem'
 
 function App() {
-  // Bloco 3: adiciona os estados do valor da compra e do valor pago
-  const [valorCompra, setValorCompra] = useState('');
-  const [valorPago, setValorPago] = useState('');
-  const [troco, setTroco] = useState(null);
+
+  // Estados dos valores digitados
+  const [valorCompra, setValorCompra] = useState('')
+  const [valorPago, setValorPago] = useState('')
+
+  // Estados do resultado
+  const [troco, setTroco] = useState(null)
   const [cedulasEMoedas, setCedulasEMoedas] = useState(null)
 
-  // Bloco 4: função que calcula o troco 
-  function calcularTroco() {
-    const compra = Number(valorCompra);
-    const pago = Number(valorPago);
+  // Estado das mensagens
+  const [mensagem, setMensagem] = useState('')
 
-    if (pago < compra) {
-      setTroco(null);
-      return;
+
+  // Função responsável pelo cálculo
+  function calcularTroco() {
+
+    // Limpa mensagens anteriores
+    setMensagem('')
+
+    // Verifica se os campos foram preenchidos
+    if (valorCompra === '' || valorPago === '') {
+      setMensagem('Preencha todos os campos.')
+      setTroco(null)
+      setCedulasEMoedas(null)
+      return
     }
 
-    const resultadoTroco = pago - compra;
-    setTroco(resultadoTroco);
+    const compra = Number(valorCompra)
+    const pago = Number(valorPago)
+
+    // Verifica se os valores são válidos
+    if (isNaN(compra) || isNaN(pago) || compra < 0 || pago < 0) {
+      setMensagem('Digite valores válidos.')
+      setTroco(null)
+      setCedulasEMoedas(null)
+      return
+    }
+
+    // Verifica se o pagamento é suficiente
+    if (pago < compra) {
+      setMensagem('O valor pago é insuficiente.')
+      setTroco(null)
+      setCedulasEMoedas(null)
+      return
+    }
+
+    // Calcula o troco
+    const resultadoTroco = pago - compra
+
+    setTroco(resultadoTroco)
+
+    // Verifica se não existe troco
+    if (resultadoTroco === 0) {
+      setMensagem('Pagamento realizado. Não há troco.')
+      setCedulasEMoedas(null)
+      return
+    }
+
+    // Calcula as cédulas e moedas
+    const resultadoCedulasEMoedas =
+      calcularCedulasEMoedas(resultadoTroco)
+
+    setCedulasEMoedas(resultadoCedulasEMoedas)
+  }
 
 
-    const resultadoCedulasEMoedas = calcularCedulasEMoedas(resultadoTroco);
-
-    setCedulasEMoedas(resultadoCedulasEMoedas);
-  };
-
-  // Bloco 5: função que calcula a quantidade de cédulas e moedas necessárias para o troco
+  // Função que calcula a quantidade de cédulas e moedas
   function calcularCedulasEMoedas(troco) {
 
     let valor = Math.round(troco * 100)
@@ -50,7 +95,9 @@ function App() {
     const resultado = {}
 
     for (const item of valores) {
+
       const quantidade = Math.floor(valor / item.valor)
+
       resultado[item.nome] = quantidade
 
       valor -= quantidade * item.valor
@@ -59,52 +106,37 @@ function App() {
     return resultado
   }
 
+
   return (
     <main className="app">
+
       <div className="container">
+
         <h1>Máquina de Troco</h1>
-        
+
+        <EntradaValores
+          valorCompra={valorCompra}
+          valorPago={valorPago}
+          setValorCompra={setValorCompra}
+          setValorPago={setValorPago}
+        />
+
+        <Mensagem mensagem={mensagem} />
+
         <div className="botao">
-          <BotaoCalcular texto="Calcular Troco" onClick={calcularTroco} />
+          <BotaoCalcular
+            texto="Calcular Troco"
+            onClick={calcularTroco}
+          />
         </div>
 
-        <div className="resultado-calculo">
+        <ResultadoTroco
+          troco={troco}
+          cedulasEMoedas={cedulasEMoedas}
+        />
 
-          {troco !== null && (
-            <p>Troco: R$ {troco.toFixed(2)}</p>
-          )}
-
-          {cedulasEMoedas && (
-        <div className="cedulas-moedas">
-          <h2>Cédulas e Moedas:</h2>
-
-          <div className="colunas">
-
-            <div className="coluna">
-              <h3>Cédulas</h3>
-
-              <p>R$ 100: {cedulasEMoedas.nota100}</p>
-              <p>R$ 50: {cedulasEMoedas.nota50}</p>
-              <p>R$ 20: {cedulasEMoedas.nota20}</p>
-              <p>R$ 10: {cedulasEMoedas.nota10}</p>
-              <p>R$ 5: {cedulasEMoedas.nota5}</p>
-              <p>R$ 2: {cedulasEMoedas.nota2}</p>
-            </div>
-
-            <div className="coluna">
-              <h3>Moedas</h3>
-
-              <p>R$ 1,00: {cedulasEMoedas.moeda1}</p>
-              <p>R$ 0,50: {cedulasEMoedas.moeda50}</p>
-              <p>R$ 0,25: {cedulasEMoedas.moeda25}</p>
-              <p>R$ 0,10: {cedulasEMoedas.moeda10}</p>
-              <p>R$ 0,05: {cedulasEMoedas.moeda05}</p>
-            </div>
-          </div>
-        </div>
-      )};
-        </div>
       </div>
+
     </main>
   )
 }
