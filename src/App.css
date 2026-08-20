@@ -9,24 +9,12 @@
 .container {
   background-color: var(--box-color);
   width: 100%;
-  max-width: 490px;
+  max-width: 620px;
   min-height: auto;
   padding: 45px 70px;
   border-radius: 10px;
   box-sizing: border-box;
 }
-
-/* Título */
-
-.container h1 {
-  text-align: center;
-  margin: 0 0 45px 0;
-  font-family: var(--text-font-family);
-  font-size: 42px;
-  color: var(--text-color);
-}
-
-/* Botão */
 
 .botao {
   display: flex;
@@ -52,7 +40,6 @@
   cursor: pointer;
 }
 
-/* Resultado */
 
 .resultado-calculo {
   display: flex;
@@ -71,8 +58,6 @@
 .coluna {
   text-align: left;
 }
-
-/* Mensagem de erro */
 
 .mensagem {
   margin: 15px 0;

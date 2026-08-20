@@ -20,13 +20,12 @@ function App() {
   const [mensagem, setMensagem] = useState('')
 
 
-  // Função responsável pelo cálculo
+  // Função responsável pelo cálculo do troco
   function calcularTroco() {
 
     // Limpa mensagens anteriores
     setMensagem('')
 
-    // Verifica se os campos foram preenchidos
     if (valorCompra === '' || valorPago === '') {
       setMensagem('Preencha todos os campos.')
       setTroco(null)
@@ -73,7 +72,7 @@ function App() {
   }
 
 
-  // Função que calcula a quantidade de cédulas e moedas
+  // função que calcula a quantidade de cédulas e moedas
   function calcularCedulasEMoedas(troco) {
 
     let valor = Math.round(troco * 100)
